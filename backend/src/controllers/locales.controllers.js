@@ -1,6 +1,6 @@
 const pool = require("../db");
 
-const getAllLocales = async (req, res, next) => {
+const getAllLocales = async (req, res,next) => {
   try {
     const result = await pool.query("SELECT * FROM Local WHERE estatus='A'");
 
@@ -10,7 +10,7 @@ const getAllLocales = async (req, res, next) => {
   }
 };
 
-const getLocal = async (req, res, next) => {
+const getLocal = async (req, res,next) => {
   try {
     const { idLocal } = req.params;
 
@@ -29,7 +29,7 @@ const getLocal = async (req, res, next) => {
   }
 };
 
-const createLocal = async (req, res, next) => {
+const createLocal = async (req, res,next) => {
   try {
     const { codLocal, descripcion, dimensionL, categoria } = req.body;
 
@@ -44,7 +44,7 @@ const createLocal = async (req, res, next) => {
   }
 };
 
-const eliminarLocal = async (req, res, next) => {
+const eliminarLocal = async (req, res,next) => {
   try {
     const { idLocal } = req.params;
 
@@ -58,7 +58,7 @@ const eliminarLocal = async (req, res, next) => {
   }
 };
 
-const actualizarLocal = async (req, res, next) => {
+const actualizarLocal = async (req, res,next) => {
   try {
     const { idLocal } = req.params;
     const { descripcion, dimensionL, categoria } = req.body;
@@ -67,11 +67,13 @@ const actualizarLocal = async (req, res, next) => {
       "UPDATE Local set descripcion=$1 , dimensionL=$2 , categoria=$3   WHERE idLocal= $4 AND estatus=$5 RETURNING *",
       [descripcion, dimensionL, categoria, idLocal, "A"]
     );
-
+  
+    
     if (result.rows.length === 0)
-      return res.status(404).json({
-        message: "Local no encontrado",
-      });
+    return res.status(404).json({
+      message: "Local no encontrado",
+      
+    });
 
     res.json(result.rows[0]);
   } catch (error) {

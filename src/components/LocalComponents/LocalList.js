@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; 
+
 export default function LocalList() {
   const navigate=useNavigate();
   const [locales, setLocales] = useState([]);
@@ -79,7 +80,7 @@ export default function LocalList() {
                       onClick={() => navigate
                         (`/local/${local.idlocal}/edit`)}
                     >
-                      Edit
+                      Editar
                     </Button>
                     <Button
                       variant="contained"
@@ -90,7 +91,7 @@ export default function LocalList() {
                       } }
                       style={{ margin: ".5rem" }}
                     >
-                      Delete
+                      Eliminar
                     </Button>
                   </div>
                 </CardActions>

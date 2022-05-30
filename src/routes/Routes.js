@@ -12,13 +12,16 @@ import PageNotFound from "../pages/PageNotFound";
 import Register from "../pages/Register";
 import Home from "../pages/Home";
 import Alquiler from "../pages/Alquiler";
-import AreaComun from "../pages/AreaComun";
+import Area from "../pages/Area";
 import Local from "../pages/Local";
 import Reservation from "../pages/Reservation";
 import RegistrationForm from "../pages/RegistrationForm";
 
 import LocalForm from "../components/LocalComponents/LocalForm";
 import LocalList from "../components/LocalComponents/LocalList";
+
+import AreaForm from "../components/AreaComponents/AreaForm";
+import AreaList from "../components/AreaComponents/AreaList";
 
 
 
@@ -33,12 +36,17 @@ const Routes = () => {
           <Route path="*" element={<Navigate to="/not-found" />} />
           <Route path="/home" element={<Home />} />
           <Route path="/alquiler" element={<Alquiler />} />
-          <Route path="/areacomun" element={<AreaComun />} />
+          <Route path="/areacomun" element={<Area />} />
 
           <Route path="/local" element={<Local />} />
           <Route path="/local/list" element={<LocalList />} />
           <Route path="/local/new" element={<LocalForm />} />
-          <Route path="local/:id/edit" element={<LocalForm />}/>
+          <Route path="local/:idLocal/edit" element={<LocalForm />}/>
+
+          <Route path="/area" element={<Area />} />
+          <Route path="/area/list" element={<AreaList />} />
+          <Route path="/area/new" element={<AreaForm />} />
+          <Route path="area/:idArea/edit" element={<AreaForm />}/>
 
           <Route path="/reservationform" element={<Reservation />} />
           <Route path="/registrationform" element={<RegistrationForm />} />

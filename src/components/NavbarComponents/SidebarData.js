@@ -28,7 +28,7 @@ export const SidebarData = [
   {
     id: 4,
     label: "Area Comun",
-    route: "/areaComun",
+    route: "/area",
     icon: <FaIcons.FaCartPlus />,
     cName: "nav-text",
   },

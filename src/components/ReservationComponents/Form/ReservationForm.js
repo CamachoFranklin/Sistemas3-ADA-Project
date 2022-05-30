@@ -61,13 +61,13 @@ export default function ReservationForm() {
                       error={!!errors?.TipoEvento}
                       helperText={errors?.TipoEvento ? errors.TipoEvento.message : null}
                     >
-                      <MenuItem value={'Servicio'}>Servicio</MenuItem>
-                      <MenuItem value={'Comida'}>Comida</MenuItem>
-                      <MenuItem value={'Tienda de zapatos'}>Tienda de Zaátos</MenuItem>
-                      <MenuItem value={ 'Articulos Tecnologicos'}>Articulos Tecnologicos</MenuItem>
-                      <MenuItem value={'Tienda de Ropa'}>Tienda de Ropa</MenuItem>
-                      <MenuItem value={"Venta de telefonos"}>Venta de Telefonos</MenuItem>
-                      <MenuItem value={"Banco"}>Banco</MenuItem>
+                      <MenuItem value={'Culturales'}>Culturales</MenuItem>
+                      <MenuItem value={'Socioeducativas'}>Socioeducativas</MenuItem>
+                      <MenuItem value={'difusión'}>difusión</MenuItem>
+                      <MenuItem value={ 'Charlas '}>charlas</MenuItem>
+                      <MenuItem value={'Concierto'}>Concierto</MenuItem>
+                      <MenuItem value={"Baile"}>Baile Terapia</MenuItem>
+                      <MenuItem value={"Otro"}>Otro</MenuItem>
                    
                     </Select>
                 
@@ -144,7 +144,7 @@ export default function ReservationForm() {
         
                 maxLength: {
                   value: 150,
-                  message: "La Direccion no puede ser mayor a 150 caracteres"
+                  message: "La Descripcion no puede ser mayor a 150 caracteres"
                 }
             
           

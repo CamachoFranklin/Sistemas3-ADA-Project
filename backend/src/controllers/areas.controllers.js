@@ -2,7 +2,7 @@ const pool = require("../db");
 
 const getAllAreas = async (req, res,next) => {
   try {
-    const result = await pool.query("SELECT * FROM AreaComun");
+    const result = await pool.query("SELECT * FROM AreaComun WHERE estatus='A'");
 
     res.json(result.rows);
   } catch (error) {
@@ -61,11 +61,11 @@ const eliminarArea = async (req, res,next) => {
 const actualizarArea = async (req, res,next) => {
   try {
     const { idArea } = req.params;
-    const { descripcion, dimensionA, tipoA } = req.body;
+    const { descripcion, dimensionA, tipoA,precio } = req.body;
 
     const result = await pool.query(
-      "UPDATE AreaComun set descripcion=$1 , dimensionA=$2 , tipoA=$3   WHERE idArea= $4 AND estatus=$5 RETURNING *",
-      [descripcion, dimensionA, tipoA, idArea, "A"]
+      "UPDATE AreaComun set descripcion=$1 , dimensionA=$2 , tipoA=$3 ,precio=$4  WHERE idArea= $5 AND estatus=$6 RETURNING *",
+      [descripcion, dimensionA, tipoA,precio, idArea, "A"]
     );
   
     

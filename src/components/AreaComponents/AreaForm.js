@@ -15,11 +15,12 @@ import {
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 export default function LocalForm() {
-  const [local, setLocal] = useState({
-    codLocal: "",
+  const [area, setArea] = useState({
+    codArea: "",
     descripcion: "",
-    dimensionL: "",
-    categoria: "",
+    dimensionA: "",
+    tipoa: "",
+    precio: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -29,37 +30,38 @@ export default function LocalForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("http://localhost:4000/locales", {
+    const res = await fetch("http://localhost:4000/areas", {
       method: "POST",
-      body: JSON.stringify(local),
+      body: JSON.stringify(area),
       headers: { "Content-Type": "application/json" },
     });
     const data = await res.json();
     console.log(data);
 
-    navigate("/local");
+    navigate("/area");
   };
 
   const handleChange = (e) => {
-    setLocal({ ...local, [e.target.name]: e.target.value });
+    setArea({ ...area, [e.target.name]: e.target.value });
   };
 
-  const loadLocal = async (idLocal) => {
-    const res = await fetch(`http://localhost:4000/locales/${idLocal}`)
+  const loadArea = async (idArea) => {
+    const res = await fetch(`http://localhost:4000/Areas/${idArea}`);
     const data = await res.json();
-    setLocal({
-      codlocal: data.codlocal,
-     dimensionl:data.dimensionL,
-      descripcion: data.descripcion, 
-      categoria: data.categoria,
-    })
+    setArea({
+      codarea: data.codarea,
+      dimensiona: data.dimensiona,
+      descripcion: data.descripcion,
+      tipoa: data.tipoa,
+      precio: data.precio,
+    });
   };
 
   useEffect(() => {
-    if (params.idLocal) {
-      loadLocal(params.idLocal);
+    if (params.idArea) {
+      loadArea(params.idArea);
     }
-  }, [params.idLocal]);
+  }, [params.idArea]);
   return (
     <Grid
       container
@@ -70,26 +72,26 @@ export default function LocalForm() {
       <Grid item xs={3} sx={{ width: 600 }}>
         <Card sx={{ mt: 10, background: "#eee" }}>
           <Typography mt={3} textAlign="center">
-            Local
+            Area
           </Typography>
           <CardContent>
             <form onSubmit={handleSubmit}>
               <TextField
                 fullWidth
                 variant="filled"
-                placeholder="Codigo del Local"
+                placeholder="Codigo del Area"
                 sx={{
                   display: "block",
                   margin: ".5rem 0",
                 }}
-                name="codLocal"
-                value={local.codlocal}
+                name="codArea"
+                value={area.codarea}
                 onChange={handleChange}
               />
               <TextField
                 fullWidth
                 variant="filled"
-                placeholder="Descripcion del Local"
+                placeholder="Descripcion del Area"
                 multiline
                 rows={5}
                 sx={{
@@ -97,7 +99,7 @@ export default function LocalForm() {
                   margin: ".5rem 0",
                 }}
                 name="descripcion"
-                value={local.descripcion}
+                value={area.descripcion}
                 onChange={handleChange}
               />
               <Grid container align="center" spacing={2}>
@@ -105,44 +107,49 @@ export default function LocalForm() {
                   <TextField
                     fullWidth
                     variant="filled"
-                    placeholder="Dimension del Local"
+                    placeholder="Dimension del Area"
                     multiline
                     rows={1}
                     sx={{
-                      display: "block", 
+                      display: "block",
                     }}
-                    name="dimensionL"
-                    value={local.dimensionL}
+                    name="dimensionA"
+                    value={area.dimensiona}
+                    onChange={handleChange}
+                  />
+                  <TextField
+                    fullWidth
+                    variant="filled"
+                    placeholder="Precio"
+                    multiline
+                    rows={1}
+                    sx={{
+                      display: "block",
+                    }}
+                    name="precio"
+                    value={area.precio}
                     onChange={handleChange}
                   />
                 </Grid>
                 <Grid item xs={6}>
                   <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">
-                      Categoria
+                      Tipo de Area
                     </InputLabel>
                     <Select
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
                       name="categoria"
-                      value={local.categoria}
-                      label="categoria"
+                      value={area.tipoA}
+                      label="Tipo de Area"
                       onChange={handleChange}
                     >
-                      <MenuItem value={"Servicio"}>Servicio</MenuItem>
-                      <MenuItem value={"Comida"}>Comida</MenuItem>
-                      <MenuItem value={"Tienda de zapatos"}>
-                        Tienda de Zapatos
+                      <MenuItem value={"Salon para cursos"}>
+                        Salon para cursos
                       </MenuItem>
-                      <MenuItem value={"Articulos Tecnologicos"}>
-                        Articulos Tecnologicos
-                      </MenuItem>
-                      <MenuItem value={"Tienda de Ropa"}>
-                        Tienda de Ropa
-                      </MenuItem>
-                      <MenuItem value={"Venta de telefonos"}>
-                        Venta de Telefono
-                      </MenuItem>
+                      <MenuItem value={"Conciertos"}>Conciertos</MenuItem>
+                      <MenuItem value={"Bailoterapia"}>Bailoterapia</MenuItem>
+                      <MenuItem value={"Centinela"}>Centinelas</MenuItem>
                     </Select>
                   </FormControl>
                 </Grid>
@@ -152,12 +159,7 @@ export default function LocalForm() {
                 variant="contained"
                 color="primary"
                 type="submit"
-                disabled={
-                  !local.codLocal ||
-                  !local.descripcion ||
-                  !local.dimensionL ||
-                  !local.categoria
-                }
+                
                 sx={{
                   margin: ".9rem 0",
                 }}
